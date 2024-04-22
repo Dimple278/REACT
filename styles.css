@@ -55,3 +55,8 @@
 .res-logo {
   width: 100%;
 }
+
+.btn {
+  margin: 10px;
+  cursor: pointer;
+}
