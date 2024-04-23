@@ -1,4 +1,4 @@
 export const IMG_URL =
-  "https://www.shutterstock.com/image-photo/lopburi-thailand-october-272020-kfc-260nw-1841921497.jpg";
+  "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/";
 export const LOGO_URL =
   "https://www.logodesign.net/logo/smoking-burger-with-lettuce-3624ld.png";

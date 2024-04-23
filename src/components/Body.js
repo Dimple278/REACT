@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import resList from "../utils/mockdata";
 import RestaurantCard from "./RestaurantCard";
 
 const Body = () => {
-  const [listOfRestaurants, setListOfRestaurants] = useState(resList);
+  const [listOfRestaurants, setListOfRestaurants] = useState([]);
 
   const handleClick = () => {
     const filteredList = listOfRestaurants.filter(
-      (res) => res.data.avgRating > 4
+      (res) => res.info.avgRating > 4.2
     );
 
     setListOfRestaurants(filteredList);
@@ -23,9 +22,9 @@ const Body = () => {
     );
     const json = await data.json();
     console.log(json);
-    // setListOfRestaurants(
-    //   json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
-    // );
+    setListOfRestaurants(
+      json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
+    );
   };
 
   return (
@@ -35,7 +34,7 @@ const Body = () => {
       </button>
       <div className="res-container">
         {listOfRestaurants.map((restaurant) => (
-          <RestaurantCard resData={restaurant} />
+          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
         ))}
       </div>
     </div>
