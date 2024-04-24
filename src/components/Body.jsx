@@ -13,7 +13,7 @@ const Body = () => {
       (res) => res.info.avgRating > 4.2
     );
 
-    setListOfRestaurants(filteredList);
+    setFilteredListOfRestaurants(filteredList);
   };
 
   useEffect(() => {
