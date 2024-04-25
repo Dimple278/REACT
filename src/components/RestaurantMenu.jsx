@@ -6,15 +6,13 @@ import { useParams } from "react-router-dom";
 const RestaurantMenu = () => {
   const [resInfo, setResInfo] = useState(null);
   const { resId } = useParams();
+  console.log("resId", resId);
   useEffect(() => {
     fetchInfo();
   }, []);
 
   const fetchInfo = async () => {
-    // const data = await fetch(MENU_API + resId);
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.7040592&lng=77.10249019999999&restaurantId=603438&catalog_qa=undefined&isMenuUx4=true&submitAction=ENTER"
-    );
+    const data = await fetch(MENU_API + resId);
 
     const json = await data.json();
     console.log(json);
@@ -28,7 +26,10 @@ const RestaurantMenu = () => {
 
   const itemCards =
     resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card
-      ?.itemCards || [];
+      ?.itemCards ||
+    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card
+      ?.itemCards ||
+    [];
 
   return (
     <div>
