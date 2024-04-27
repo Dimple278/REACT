@@ -21,15 +21,21 @@ const RestaurantMenu = () => {
     [];
 
   return (
-    <div>
-      <h1>{name}</h1>
-      <h3>{cuisines.join(", ")}</h3>
-      <h4>Rating:{avgRating}</h4>
-      <p>{totalRatingsString}</p>
-      <h2>Menu</h2>
+    <div className="menu bg-white shadow-lg rounded-lg p-4">
+      <h1 className="text-3xl font-semibold mb-2">{name}</h1>
+      <h3 className="text-lg mb-2">{cuisines.join(", ")}</h3>
+      <div className="flex mb-2">
+        <span className="bg-yellow-400 rounded-md py-1 px-2 text-sm mr-2">
+          {avgRating} stars
+        </span>
+        <span className="text-gray-600">{totalRatingsString}</span>
+      </div>
+      <h2 className="text-xl font-semibold mb-2">Menu</h2>
       <ul>
         {itemCards.map((item) => (
-          <li key={item.card.info.id}>{item.card.info.name}</li>
+          <li key={item.card.info.id} className="text-gray-700">
+            {item.card.info.name}
+          </li>
         ))}
       </ul>
     </div>
