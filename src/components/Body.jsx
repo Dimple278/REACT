@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import RestaurantCard, { withOpen } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -29,7 +30,7 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5/?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
-    console.log(json);
+    // console.log(json);
     //Optional Chaining
     setListOfRestaurants(
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
@@ -38,9 +39,10 @@ const Body = () => {
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
-  console.log("list of restaurants", listOfRestaurants);
+  // console.log("list of restaurants", listOfRestaurants);
 
   const onlineStatus = useOnlineStatus();
+  const { loggedInUser, setUserName } = useContext(UserContext);
   if (onlineStatus === false)
     return (
       <h1>
@@ -82,6 +84,14 @@ const Body = () => {
         >
           Top Rated restaurants
         </button>
+      </div>
+      <div className="search m-2 p-2 flex items-center">
+        <label>UserName: </label>
+        <input
+          className="border border-black p-2"
+          value={loggedInUser}
+          onChange={(e) => setUserName(e.target.value)}
+        />
       </div>
       <div className="res-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredListOfRestauants.map((restaurant) => (
