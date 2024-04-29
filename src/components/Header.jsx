@@ -3,13 +3,14 @@ import { LOGO_URL } from "../utils/constants";
 import { useContext, useEffect, useState } from "react";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
   const onlineStatus = useOnlineStatus();
   const { loggedInUser } = useContext(UserContext);
+  const cartItems = useSelector((state) => state.cart.items);
 
-  console.log("Logged in user", loggedInUser);
   return (
     <div className="flex justify-between bg-gray-800 p-4">
       <div>
@@ -38,6 +39,11 @@ const Header = () => {
           <li>
             <Link to="/grocery" className="text-white hover:text-gray-300 px-2">
               Grocery
+            </Link>
+          </li>
+          <li>
+            <Link to="/cart" className="text-white hover:text-gray-300 px-2">
+              Cart- {cartItems.length}
             </Link>
           </li>
           <button
